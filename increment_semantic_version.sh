@@ -1,5 +1,7 @@
 #!/bin/bash
 
+increment_operation="patch"
+
 increment() {
   local delimiter=.
   local array=($(echo "$1" | tr $delimiter '\n'))
@@ -9,10 +11,12 @@ increment() {
   echo "$(local IFS=$delimiter ; echo "${array[*]}")"
 }
 
+echo "${@:1}"
+
 while test $# -gt 0; do
   case "$1" in
     --increment*)
-      INCREMENT_OPERATION=$(echo "$1" | sed -e 's/^[^=]*=//g')
+      increment_operation=$(echo "$1" | sed -e 's/^[^=]*=//g')
       shift
       ;;
     *)
@@ -21,12 +25,12 @@ while test $# -gt 0; do
   esac
 done
 
-if [[ $INCREMENT_OPERATION == "major" ]]; then
-     increment "$CURRENT_VERSION" 0
-elif [[ $INCREMENT_OPERATION == "minor" ]]; then
-     increment "$CURRENT_VERSION" 1
+if [[ $increment_operation == "major" ]]; then
+     increment "$1" 0
+elif [[ $increment_operation == "minor" ]]; then
+     increment "$1" 1
 else
-  increment "$CURRENT_VERSION" 2
+  increment "$1" 2
 fi
 
 
