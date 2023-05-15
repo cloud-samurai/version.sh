@@ -28,11 +28,8 @@ if [ ! -f "$1" ]; then
     exit 1
 fi
 
-current_version="$(cat "$1")"
+current_version="$(cat "$1" | tr -d " \t\n\r" )"
 
-echo $current_version
-echo $increment_operation
-
-wget -qO- https://raw.githubusercontent.com/davemaple/version.sh/main/increment_semantic_version.sh | bash -s -- --increment="$increment_operation" "$current_version" > "$1"
+wget -qO- https://raw.githubusercontent.com/davemaple/version.sh/main/increment_semantic_version.sh | bash -s -- --increment="$increment_operation" "$current_version" | tr -d " \t\n\r" > "$1"
 
 
