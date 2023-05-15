@@ -30,7 +30,6 @@ EOF
 
 current_version="$(cat "$1")"
 
-curl -s https://raw.githubusercontent.com/davemaple/version.sh/main/increment_sementic_version.sh | bash -s "$current_version" --increment="$increment_operation" > "$1"
-
+wget -qO- https://raw.githubusercontent.com/davemaple/version.sh/main/increment_semantic_version.sh | bash -s -- "$increment_operation" "$current_version" > "$1"
 
 
