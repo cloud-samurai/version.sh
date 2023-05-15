@@ -30,6 +30,6 @@ fi
 
 current_version="$(cat "$1")"
 
-wget -qO- https://raw.githubusercontent.com/davemaple/version.sh/main/increment_semantic_version.sh | bash -s -- "$increment_operation" "$current_version" > "$1"
+wget -qO- https://raw.githubusercontent.com/davemaple/version.sh/main/increment_semantic_version.sh | bash -s -- --increment="$increment_operation" "$current_version" > "$1"
 
 
