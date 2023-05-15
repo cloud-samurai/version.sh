@@ -15,8 +15,21 @@ EOF
 )"
 
 current_version="$(cat "$1")"
+increment_operation="patch"
 
-curl -s https://raw.githubusercontent.com/davemaple/version.sh/main/increment_sementic_version.sh | bash -s "$current_version" "${@:1}" > "$1"
+while test $# -gt 0; do
+  case "$1" in
+    --increment*)
+      increment_operation=$(echo "$1" | sed -e 's/^[^=]*=//g')
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+curl -s https://raw.githubusercontent.com/davemaple/version.sh/main/increment_sementic_version.sh | bash -s "$current_version" --increment="$increment_operation" > "$1"
 
 
 
