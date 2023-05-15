@@ -22,8 +22,8 @@ echo $1
 echo $2
 
 # ensure the file exists
-if [ ! -f "$1" ]; then
-    echo "Semantic version file: $1 does not exist."
+if [ ! -f "$2" ]; then
+    echo "Semantic version file: $2 does not exist."
     exit 1
 fi
 

@@ -11,8 +11,6 @@ increment() {
   echo "$(local IFS=$delimiter ; echo "${array[*]}")"
 }
 
-echo "${@:1}"
-
 while test $# -gt 0; do
   case "$1" in
     --increment*)
